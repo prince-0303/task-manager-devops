@@ -1,0 +1,30 @@
+# Python
+env/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Django
+*.log
+db.sqlite3
+staticfiles/
+media/
+
+# Environment variables — NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
