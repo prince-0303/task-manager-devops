@@ -10,6 +10,11 @@ services:
     ports:
       - "5432:5432"
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
   web:
     build: .
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
@@ -22,5 +27,17 @@ services:
     depends_on:
       - db
 
+  celery:
+    build: .
+    command: celery -A config.celery worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+      
 volumes:
   postgres_data:
