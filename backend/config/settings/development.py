@@ -5,15 +5,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# Use SQLite locally, PostgreSQL in Docker
-if os.environ.get('DB_HOST') == 'db':
+DB_HOST = os.environ.get('DB_HOST', '')
+
+if DB_HOST in ('db', 'localhost'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.environ.get('DB_NAME'),
             'USER': os.environ.get('DB_USER'),
             'PASSWORD': os.environ.get('DB_PASSWORD'),
-            'HOST': os.environ.get('DB_HOST'),
+            'HOST': DB_HOST,
             'PORT': os.environ.get('DB_PORT', '5432'),
         }
     }
