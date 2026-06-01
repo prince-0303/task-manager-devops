@@ -11,6 +11,7 @@ app.conf.update(
     result_backend='django-db',
     accept_content=['json'],
     task_serializer='json',
+    task_always_eager=os.environ.get('CELERY_TASK_ALWAYS_EAGER', 'False') == 'True',
 )
 
 app.autodiscover_tasks()
